@@ -1,9 +1,13 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const Topics = () => {
+   const navigate = useNavigate();
+   const handleQuiz = (id)=>{
+      navigate(`topic/quiz/${id}`)
+   }
    const topics = useLoaderData().data;
    console.log(topics);
    return (
@@ -20,7 +24,7 @@ const Topics = () => {
          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 my-14">
             {
                topics.map((topic, idx) => {
-                  const {name, total, logo} = topic;
+                  const {name, total, logo, id} = topic;
                   return (
                      <div key={idx} className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
                         <figure className="px-4 pt-10">
@@ -32,7 +36,7 @@ const Topics = () => {
                               <h3>Total Quiz: {total}</h3>
                            </div>
                            <div className="card-actions w-full mt-3">
-                              <button className="btn btn-primary w-full">
+                              <button className="btn btn-primary w-full" onClick={()=>handleQuiz(id)}>
                                  Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon>
                               </button>
                            </div>

@@ -3,6 +3,7 @@ import Main from "../../layouts/Main";
 import Blog from "../Blog/Blog";
 import NotFound from "../NotFound/NotFound";
 import Statistics from "../Statistics/Statistics";
+import Topic from "../Topic/Topic";
 import Topics from "../Topics/Topics";
 
 export const router = createBrowserRouter([
@@ -24,6 +25,13 @@ export const router = createBrowserRouter([
          {
             path: '/blog',
             element: <Blog></Blog>
+         },
+         {
+            path: 'topic/quiz/:quizId',
+            loader: async({params})=>{
+               return fetch(`https://openapi.programming-hero.com/api/quiz/${params.quizId}`)
+            },
+            element: <Topic></Topic>
          }
       ]
    },
