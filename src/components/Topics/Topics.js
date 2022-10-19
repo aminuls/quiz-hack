@@ -1,8 +1,11 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 const Topics = () => {
+   const topics = useLoaderData().data;
+   console.log(topics);
    return (
       <div className="mt-6 mx-3 sm:mx-12">
          <div className="card w-full bg-base-100 shadow-xl image-full h-80">
@@ -15,62 +18,29 @@ const Topics = () => {
          </div>
 
          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 my-14">
-            <div className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
-               <figure className="px-4 pt-10">
-                  <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl w-full" />
-               </figure>
-               <div className="card-body items-center text-center">
-                  <div className="flex justify-between w-full text-lg flex-wrap font-semibold">
-                     <h3>Name</h3>
-                     <h3>Total Quiz</h3>
-                  </div>
-                  <div className="card-actions w-full mt-3">
-                     <button className="btn btn-primary w-full">Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon></button>
-                  </div>
-               </div>
-            </div>
-            <div className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
-               <figure className="px-4 pt-10">
-                  <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl w-full" />
-               </figure>
-               <div className="card-body items-center text-center">
-                  <div className="flex justify-between w-full text-lg flex-wrap font-semibold">
-                     <h3>Name</h3>
-                     <h3>Total Quiz</h3>
-                  </div>
-                  <div className="card-actions w-full mt-3">
-                     <button className="btn btn-primary w-full">Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon></button>
-                  </div>
-               </div>
-            </div>
-            <div className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
-               <figure className="px-4 pt-10">
-                  <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl w-full" />
-               </figure>
-               <div className="card-body items-center text-center">
-                  <div className="flex justify-between w-full text-lg flex-wrap font-semibold">
-                     <h3>Name</h3>
-                     <h3>Total Quiz</h3>
-                  </div>
-                  <div className="card-actions w-full mt-3">
-                     <button className="btn btn-primary w-full">Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon></button>
-                  </div>
-               </div>
-            </div>
-            <div className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
-               <figure className="px-4 pt-10">
-                  <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl w-full" />
-               </figure>
-               <div className="card-body items-center text-center">
-                  <div className="flex justify-between w-full text-lg flex-wrap font-semibold">
-                     <h3>Name</h3>
-                     <h3>Total Quiz</h3>
-                  </div>
-                  <div className="card-actions w-full mt-3">
-                     <button className="btn btn-primary w-full">Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon></button>
-                  </div>
-               </div>
-            </div>
+            {
+               topics.map((topic, idx) => {
+                  const {name, total, logo} = topic;
+                  return (
+                     <div key={idx} className="card-compact w-full bg-base-100 shadow-2xl rounded-2xl">
+                        <figure className="px-4 pt-10">
+                           <img src={logo} alt="Shoes" className="rounded-xl w-full max-h-64 object-contain bg-slate-400" />
+                        </figure>
+                        <div className="card-body items-center text-center">
+                           <div className="flex justify-between w-full text-lg flex-wrap font-semibold">
+                              <h3>{name}</h3>
+                              <h3>Total Quiz: {total}</h3>
+                           </div>
+                           <div className="card-actions w-full mt-3">
+                              <button className="btn btn-primary w-full">
+                                 Start Quiz<FontAwesomeIcon icon={faArrowRight} className="ml-3 text-lg"></FontAwesomeIcon>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  )
+               })
+            }
          </div>
       </div>
    );
